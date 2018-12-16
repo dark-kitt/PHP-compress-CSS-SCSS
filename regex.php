@@ -1,6 +1,4 @@
 <?php
-// namespace
-define('NAMESPACE', 'HTML5-BC__');
 // match spaces
 define('REGEX_SPACES', '\s+');
 
@@ -23,7 +21,3 @@ define('REGEX_ADD_REM_HASCLASS_JQUERY', '(?:\.addClass\b|\.hasClass\b|\.removeCl
 define('REGEX_SELECTORS_JQUERY', '(?:\$)\((?(?=\s+)\s+)[\"\'](?(?=\s+)\s+)(?(?=[a-zA-Z0-9\*\s\-\:\>\[\]\~\+\*\,\|\=\$\^\'\"\_\d]+?)[a-zA-Z0-9\*\s\-\:\>\[\]\~\+\*\,\|\=\$\^\'\"\_\d]+?)(?=\#|\.)(?|([\#\.a-zA-Z0-9\*\s\-\:\>\[\]\~\+\*\,\|\=\$\^\"\'\_\d\(\)]+?))(?(?=\s+)\s+)[\"\'](?(?=\s+)\s+)\)');
 define('REGEX_ID_SELECTORS_JQUERY', '\#[\w\-]+');
 define('REGEX_CLASS_SELECTORS_JQUERY', '\.[\w\-]+');
-
-
-// define patterns for namespaceCSS
-define('REGEX_SVG_ALL', '<svg[^>]*?[^>]*?>([^<]*(?(?!<\/svg>)<))*<\/svg>');
