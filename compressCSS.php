@@ -81,27 +81,27 @@
 
             $js_ids = [
                 [
-                    '/((?:getElementById\b)\(.*?)(',
-                    '\b)/'
+                    '/((?:getElementById\b)\(.*?)(?<!\-|\w)(',
+                    '\b)(?!\-)/'
                 ],
                 [
                     '/((?:\$)\(.*?(?=\#)\#)(',
-                    '\b)/'
+                    '\b)(?!\-)/'
                 ]
             ];
 
             $js_classes = [
                 [
-                    '/((?:getElementsByClassName\b)\(.*?)(',
-                    '\b)/'
+                    '/((?:getElementsByClassName\b)\(.*?)(?<!\-|\w)(',
+                    '\b)(?!\-)/'
                 ],
                 [
                     '/((?:\$)\(.*?(?=\.)\.)(',
-                    '\b)/'
+                    '\b)(?!\-)/'
                 ],
                 [
-                    '/((?:\.addClass\b|\.hasClass\b|\.removeClass\b)\(.*?)(',
-                    '\b)/'
+                    '/((?:\.addClass\b|\.hasClass\b|\.removeClass\b)\(.*?)(?<!\-|\w)(',
+                    '\b)(?!\-)/'
                 ]
             ];
 
@@ -109,7 +109,7 @@
             foreach ($scss_ids as $id)
             {
                 $scss = $this->set_selector($scss, '/(\#)' . $id . '\b(?!\-|\w)/', $count);
-                $html = $this->set_selector($html, '/(id(?(?=\s+)\s+)\=(?(?=\s+)\s+)\"[^"]*?)((?<!\-|\w)' . $id . '\b)/', $count);
+                $html = $this->set_selector($html, '/(id(?(?=\s+)\s+)\=(?(?=\s+)\s+)\"[^"]*?)((?<!\-|\w)' . $id . '\b(?!\-|\w))/', $count);
                 foreach ($js_ids as $js_id) {
                     $js = $this->set_selector($js, $js_id[0] . $id . $js_id[1], $count);
                 }
@@ -121,7 +121,7 @@
             foreach ($scss_classes as $class)
             {
                 $scss = $this->set_selector($scss, '/(\.)' . $class . '\b(?!\-|\w)/', $count);
-                $html = $this->set_selector($html, '/(class\b(?(?=\s+)\s+)\=(?(?=\s+)\s+).*?(?|(?:(?=\s+)\s+)|(?:(?=\")\")|(?:(?=\')\')))(' . $class . '\b.*?(?=\"))/', $count);
+                $html = $this->set_selector($html, '/(class\b(?(?=\s+)\s+)\=(?(?=\s+)\s+).*?(?|(?:(?=\s+)\s+)|(?:(?=\")\")|(?:(?=\')\')))(' . $class . '\b(?!\-|\w))/', $count);
                 foreach ($js_classes as $js_class) {
                     $js = $this->set_selector($js, $js_class[0] . $class . $js_class[1], $count);
                 }
@@ -323,7 +323,7 @@
                     {
                         $this->replace_value($value, $search, $replacement);
                     }
-                    elseif (preg_match('/'.$value.'\b/', $search))
+                    elseif (preg_match('/(?<!\-)' . $search . '\b(?!\-)/', $value))
                     {
                         $value = $replacement;
                     }
